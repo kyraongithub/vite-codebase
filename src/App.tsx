@@ -1,31 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { routes } from "./route";
 import ProtectedRoute from "./route/ProtectedRoute";
 import LazyFallback from "./components/ui/lazyfallback";
 import "./App.css";
 
 function App() {
+  const renderRoute = (route: (typeof routes)[number], index: number) => {
+    const Component = route.component;
+
+    const element = route.isProtected ? (
+      <ProtectedRoute layout={route.layout}>
+        <Component />
+      </ProtectedRoute>
+    ) : (
+      <Component />
+    );
+
+    return <Route key={index} path={route.path} element={element} />;
+  };
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LazyFallback />}>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                route.isProtected ? (
-                  <ProtectedRoute layout={route.layout}>
-                    <route.component />
-                  </ProtectedRoute>
-                ) : (
-                  <route.component />
-                )
-              }
-            />
-          ))}
-        </Routes>
+        <Routes>{routes.map(renderRoute)}</Routes>
       </Suspense>
     </BrowserRouter>
   );

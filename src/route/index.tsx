@@ -1,10 +1,11 @@
-import { ComponentType, lazy, ReactNode } from "react";
+import { ComponentType, lazy } from "react";
 import AdminLayout from "../components/layout/AdminLayout";
+import { LayoutType } from "../types/Layout.type";
 
 interface RouteInterface {
   path: string;
   component: ComponentType;
-  layout?: ComponentType<{ children: ReactNode }>;
+  layout?: LayoutType;
   isProtected?: boolean;
 }
 

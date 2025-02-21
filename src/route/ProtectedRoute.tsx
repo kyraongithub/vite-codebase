@@ -1,9 +1,10 @@
+import { ReactNode } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { ComponentType, ReactNode } from "react";
+import { LayoutType } from "../types/Layout.type";
 
 interface RouteProps {
   children?: ReactNode;
-  layout?: ComponentType<{ children: ReactNode }>;
+  layout?: LayoutType;
 }
 
 const ProtectedRoute = ({ children, layout }: RouteProps) => {
