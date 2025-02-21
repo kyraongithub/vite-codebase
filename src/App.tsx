@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Suspense, useMemo } from "react";
+import { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import LazyFallback from "./components/ui/lazyfallback";
 import { routes } from "./route";
 import ProtectedRoute from "./route/ProtectedRoute";
-import LazyFallback from "./components/ui/lazyfallback";
-import "./App.css";
 
 function App() {
   const renderRoute = (route: (typeof routes)[number], index: number) => {
