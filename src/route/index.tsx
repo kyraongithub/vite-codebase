@@ -1,12 +1,10 @@
-import { ComponentType, ReactNode } from "react";
-import Homepage from "../components/pages/homepage";
-import Dashboard from "../components/pages/dashboard";
+import { ComponentType } from "react";
 import AdminLayout from "../components/layout/AdminLayout";
-import Login from "../components/pages/login";
+import pages from "../components/pages";
 
 interface RouteInterface {
   path: string;
-  component: ReactNode;
+  component: any;
   layout?: ComponentType | null;
   isProtected?: boolean;
 }
@@ -14,15 +12,15 @@ interface RouteInterface {
 export const routes: RouteInterface[] = [
   {
     path: "/",
-    component: <Homepage />,
+    component: pages.Homepage,
   },
   {
     path: "/login",
-    component: <Login />,
+    component: pages.Login,
   },
   {
     path: "/dashboard",
-    component: <Dashboard />,
+    component: pages.Dashboard,
     layout: AdminLayout,
     isProtected: true,
   },
