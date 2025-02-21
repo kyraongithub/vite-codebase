@@ -1,26 +1,25 @@
-import { ComponentType } from "react";
+import { ComponentType, lazy } from "react";
 import AdminLayout from "../components/layout/AdminLayout";
-import pages from "../components/pages";
 
 interface RouteInterface {
   path: string;
-  component: any;
-  layout?: ComponentType | null;
+  component: ComponentType;
+  layout?: ComponentType;
   isProtected?: boolean;
 }
 
 export const routes: RouteInterface[] = [
   {
     path: "/",
-    component: pages.Homepage,
+    component: lazy(() => import("../components/pages/homepage")),
   },
   {
     path: "/login",
-    component: pages.Login,
+    component: lazy(() => import("../components/pages/login")),
   },
   {
     path: "/dashboard",
-    component: pages.Dashboard,
+    component: lazy(() => import("../components/pages/dashboard")),
     layout: AdminLayout,
     isProtected: true,
   },
