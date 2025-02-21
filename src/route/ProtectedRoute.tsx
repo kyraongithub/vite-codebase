@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { ComponentType } from "react";
+import { ComponentType, ReactNode } from "react";
 
 interface RouteProps {
-  children?: React.ReactNode;
-  layout?: ComponentType | null;
+  children?: ReactNode;
+  layout?: ComponentType<{ children: ReactNode }>;
 }
 
 const ProtectedRoute = ({ children, layout }: RouteProps) => {
@@ -11,10 +11,13 @@ const ProtectedRoute = ({ children, layout }: RouteProps) => {
     const token = localStorage.getItem("token");
     return !!token;
   };
-  const Layout: any = layout;
 
   if (isAuthenticated()) {
-    return children ? <Layout>{children}</Layout> : <Outlet />;
+    if (layout) {
+      const LayoutComponent = layout;
+      return <LayoutComponent>{children}</LayoutComponent>;
+    }
+    return children ? <>{children}</> : <Outlet />;
   } else {
     return <Navigate to="/login" replace />;
   }

@@ -1,3 +1,4 @@
+import { ComponentType, ReactNode } from "react";
 import { AdminProps } from "./Admin.interface";
 
 const SuperadminLayout = ({ children }: AdminProps) => {
@@ -9,4 +10,4 @@ const SuperadminLayout = ({ children }: AdminProps) => {
   );
 };
 
-export default SuperadminLayout as React.ComponentType;
+export default SuperadminLayout as ComponentType<{ children: ReactNode }>;
